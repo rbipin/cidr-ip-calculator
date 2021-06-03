@@ -1,0 +1,6 @@
+"""
+"""
+
+
+def getHealthCheck():
+    return "Healthy!"
