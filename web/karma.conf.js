@@ -6,11 +6,11 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
-      require('karma-jasmine'),
-      require('karma-chrome-launcher'),
-      require('karma-jasmine-html-reporter'),
-      require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      import('karma-jasmine'),
+      import('karma-chrome-launcher'),
+      import('karma-jasmine-html-reporter'),
+      import('karma-coverage'),
+      import('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
       jasmine: {
@@ -25,12 +25,9 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/cidr-ip-calculator'),
+      dir: import('path').join(__dirname, './coverage/cidr-ip-calculator'),
       subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ]
+      reporters: [{ type: 'html' }, { type: 'text-summary' }]
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,

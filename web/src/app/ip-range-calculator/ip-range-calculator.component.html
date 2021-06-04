@@ -1,1 +1,14 @@
-<p>ip-range-calculator works!</p>
+<div id="ip-range-calc-card" class="card">
+  <h3>Find IP Ranges</h3>
+  <section>
+    <mat-form-field appearance="outline" class="ip-address">
+      <mat-label>IP Address</mat-label>
+      <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="ipAddress">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="cidr-range">
+      <mat-label>CIDR</mat-label>
+      <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange">
+    </mat-form-field>
+
+  </section>
+</div>

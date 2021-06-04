@@ -8,9 +8,8 @@ describe('IpRangeCalculatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IpRangeCalculatorComponent ]
-    })
-    .compileComponents();
+      declarations: [IpRangeCalculatorComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
