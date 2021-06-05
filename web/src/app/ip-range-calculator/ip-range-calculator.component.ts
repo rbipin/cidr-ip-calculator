@@ -8,4 +8,18 @@ import { Component } from '@angular/core';
 export class IpRangeCalculatorComponent {
   ipAddress = '';
   cidrRange = '';
+  isProcessing = true;
+  ipInputError = '';
+  cidrInputError = '';
+
+  onCidrChange(): void {}
+  onIPChange(): void{
+
+  }
+
+  private validateIP(){
+    if (!this.ipAddress){
+      
+    }
+  }
 }

@@ -12,11 +12,84 @@
 .cidr-range {
   width: 100px;
 }
+.calculate-button-container {
+  margin-left: 10px;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  direction: co;
+}
+.divider-line {
+  border-width: 0;
+  border-top: 0.5px solid rgba(187, 184, 184, 0.393);
+}
+.spacer {
+  height: 15px;
+}
+.results-container {
+  margin-top: 15px;
+  p {
+    margin: 2px;
+    &.label {
+      font-weight: 100;
+      color: rgba(187, 184, 184, 0.7);
+    }
+    &.value {
+      margin-top: 5px;
+      font-size: 1.25em;
+    }
+  }
+  .content-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+.result-header {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  .result-header-text {
+    font: 400 16px/28px 'Rubik', 'Helvetica Neue', sans-serif;
+    margin-right: 5px;
+  }
+  .mat-icon {
+    &.processing {
+      color: orange;
+      animation: rotation 2s linear infinite;
+    }
+    &.completed {
+      color: green;
+    }
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.input-error {
+  margin: 0px;
+  color: #bf5353;
+}
 
 ::ng-deep {
   $custom-main-color: white;
   $custom-label-color: white(0, 0, 0, 0.6);
 
+  .mat-form-field-wrapper {
+    padding-bottom: 0px;
+  }
   .mat-form-field-label {
     color: $custom-main-color;
   }
@@ -49,7 +122,7 @@
     caret-color: $custom-main-color !important;
   }
   .mat-input-element::placeholder {
-    color: rgb(196, 193, 193) ;
+    color: rgb(196, 193, 193);
   }
 
   // mat-input error caret color

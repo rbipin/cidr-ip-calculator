@@ -1,14 +1,57 @@
 <div id="ip-range-calc-card" class="card">
   <h3>Find IP Ranges</h3>
-  <section>
-    <mat-form-field appearance="outline" class="ip-address">
-      <mat-label>IP Address</mat-label>
-      <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="ipAddress">
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="cidr-range">
-      <mat-label>CIDR</mat-label>
-      <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange">
-    </mat-form-field>
-
+  <section class="flex-row">
+    <div>
+      <mat-form-field appearance="outline" class="ip-address">
+        <mat-label>IP Address</mat-label>
+        <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="ipAddress"
+          (ngModelChange)="onIPChange()">
+      </mat-form-field>
+      <p class="input-error" *ngIf="ipInputError">{{ipInputError}}</p>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="cidr-range">
+        <mat-label>CIDR</mat-label>
+        <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange"
+          (ngModelChange)="onCidrChange()">
+      </mat-form-field>
+      <p class="input-error" *ngIf="cidrInputError">{{cidrInputError}}}</p>
+    </div>
+  </section>
+  <!--Results Section-->
+  <div class="spacer"></div>
+  <div class="result-header">
+    <span class="result-header-text">Results</span>
+    <ng-container *ngIf="isProcessing; else completed">
+      <mat-icon class="processing">loop</mat-icon>
+    </ng-container>
+    <ng-template #completed>
+      <mat-icon class="completed">check_circle_outlined</mat-icon>
+    </ng-template>
+  </div>
+  <hr class="divider-line">
+  <section class="results-container">
+    <div class="row">
+      <div class="col-md-6 content-container">
+        <p class="label">Total Possible IPs</p>
+        <p class="value">1000</p>
+      </div>
+      <div class="col-md-6 content-container">
+        <p class="label">Total Usable IPs</p>
+        <p class="value">1000</p>
+      </div>
+      <div class="col-md-6 content-container">
+        <p class="label">Network Address</p>
+        <p class="value">10.120.130.140</p>
+      </div>
+      <div class="col-md-6 content-container">
+        <p class="label">Broadcast Address</p>
+        <p class="value">10.120.130.140</p>
+      </div>
+      <div class="col-md-6 content-container">
+        <p class="label">SubnetMask</p>
+        <p class="value">255.255.255.255</p>
+      </div>
+    </div>
   </section>
 </div>
