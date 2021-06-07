@@ -5,7 +5,7 @@
       <mat-form-field appearance="outline" class="ip-address">
         <mat-label>IP Address</mat-label>
         <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="ipAddress"
-          (ngModelChange)="onIPChange()">
+          (keydown)="onIPKeyDown($event)" (ngModelChange)='onIPAddressChange()'>
       </mat-form-field>
       <p class="input-error" *ngIf="ipInputError">{{ipInputError}}</p>
     </div>
@@ -13,7 +13,7 @@
       <mat-form-field appearance="outline" class="cidr-range">
         <mat-label>CIDR</mat-label>
         <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange"
-          (ngModelChange)="onCidrChange()">
+          (keydown)="onCidrKeyDown($event)" (ngModelChange)="onCidrChange()" [maxLength]="2">
       </mat-form-field>
       <p class="input-error" *ngIf="cidrInputError">{{cidrInputError}}}</p>
     </div>
