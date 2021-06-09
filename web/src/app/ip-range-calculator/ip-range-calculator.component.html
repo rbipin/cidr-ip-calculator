@@ -13,7 +13,7 @@
         <mat-form-field appearance="outline" class="cidr-range">
           <mat-label>CIDR</mat-label>
           <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange" [maxLength]="2"
-            (ngModelChange)="onInputChange()" (keydown)="onCidrKeyDown()">
+            (ngModelChange)="onInputChange()" (keydown)="onCidrKeyDown($event)">
         </mat-form-field>
       </div>
       <div class="calculate-button-container">
@@ -32,7 +32,7 @@
   <div class="spacer"></div>
   <div class="result-header">
     <span class="result-header-text">Results</span>
-    <span>{{cidrInput}}</span>
+    <span class="result-input-display" *ngIf="turnInputDisplayOn">for {{ipAddress}} /{{cidrRange}}</span>
     <span *ngIf='ipRangeProcessingStatus !== ProcessingStatusType.None' [ngSwitch]='ipRangeProcessingStatus'>
       <ng-template [ngSwitchCase]="ProcessingStatusType.Processing">
         <mat-icon class="processing">loop</mat-icon>

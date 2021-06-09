@@ -10,7 +10,8 @@ router = APIRouter(
 )
 
 
-@router.get("/iprange/{ip}/{ciderrange}", response_model=IPRangeInfo)
+@router.get("/iprange/{ip}/{ciderrange}", response_model=IPRangeInfo,
+            description="Get IP Ranges", name="Calculate IP Ranges")
 async def runGetIPRanges(ip: str, ciderrange: int):
     try:
         return ciderIP.calculateIPRange(ip, ciderrange)
@@ -21,7 +22,7 @@ async def runGetIPRanges(ip: str, ciderrange: int):
             status_code=500, detail='Unhandled Server exception')
 
 
-@router.get("/cider-range")
+@router.post("/cider-range", name="Calculate CIDR Range")
 async def runGetCiderRange():
     try:
         return ciderIP.calculateCiderIPRange()

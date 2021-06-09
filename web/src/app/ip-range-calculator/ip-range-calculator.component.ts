@@ -21,22 +21,23 @@ export class IpRangeCalculatorComponent {
   ipRangeProcessingStatus: ProcessingStatus = ProcessingStatus.None;
   ipInputError = '';
   cidrInputError = '';
+  turnInputDisplayOn = false;
   ipRange: IPRangeInformation | null = null;
-  private lastEnteredChar = '';
-  private keysToSkip = ['Backspace', 'Delete', 'Tab'];
-  isInputValid = false;
+  isIPAddressValid = false;
+  isCidrRangeValid = false;
+  private specialKeysPressed = false;
+  private keysToSkip = ['Backspace', 'Delete', 'Tab', 'Control', 'Meta'];
+  private specialKeys = ['Control', 'Meta'];
+  isInputValid = this.isIPAddressValid && this.isCidrRangeValid;
   errorToolTip = '';
 
   constructor(private cidrIPCalcService: CIDRIpCalcService) {}
 
   onInputChange(): void {
-    const isIPAddressValid = this.verifyIPAddress();
-    const cidrRangeValid = this.verifyCIDRRange();
-    if (isIPAddressValid && cidrRangeValid) {
-      this.isInputValid = true;
-      return;
-    }
-    this.isInputValid = false;
+    this.turnInputDisplayOn = false;
+    this.ipRangeProcessingStatus = ProcessingStatus.None;
+    this.isCidrRangeValid = this.verifyCIDRRange();
+    this.isInputValid = this.isIPAddressValid && this.isCidrRangeValid;
   }
 
   private verifyIPAddress(): boolean {
@@ -85,24 +86,21 @@ export class IpRangeCalculatorComponent {
   getCidrRangeCalculation(): void {
     this.ipRangeProcessingStatus = ProcessingStatus.Processing;
     this.errorToolTip = '';
-    const ipVerification = this.verifyIPAddress();
-    const cidrRangeVerification = this.verifyCIDRRange();
-    if (ipVerification && cidrRangeVerification) {
-      const cidrRangeNum = parseInt(this.cidrRange, 10);
-      this.cidrIPCalcService
-        .getIPRangeInformation(this.ipAddress, cidrRangeNum)
-        .subscribe(
-          (result) => {
-            this.ipRangeProcessingStatus = ProcessingStatus.Completed;
-            this.ipRange = result;
-          },
-          (error) => {
-            this.ipRangeProcessingStatus = ProcessingStatus.Error;
-            this.errorToolTip = error.message;
-            console.log(error);
-          }
-        );
-    }
+    this.turnInputDisplayOn = true;
+    const cidrRangeNum = parseInt(this.cidrRange, 10);
+    this.cidrIPCalcService
+      .getIPRangeInformation(this.ipAddress, cidrRangeNum)
+      .subscribe(
+        (result) => {
+          this.ipRangeProcessingStatus = ProcessingStatus.Completed;
+          this.ipRange = result;
+        },
+        (error) => {
+          this.ipRangeProcessingStatus = ProcessingStatus.Error;
+          this.errorToolTip = error.message;
+          console.log(error);
+        }
+      );
   }
 
   onCidrKeyDown(e: KeyboardEvent): void {
@@ -119,50 +117,68 @@ export class IpRangeCalculatorComponent {
     }
   }
 
-  private getIPPreviousChar() {
+  private getIPPreviousPart() {
     if (this.ipAddress && this.ipAddress.length > 0) {
-      this.lastEnteredChar = this.ipAddress[this.ipAddress.length - 1];
-      return;
+      const ipAddrParts = this.ipAddress.split('.');
+      if (ipAddrParts.length > 0) {
+        return ipAddrParts[ipAddrParts.length - 1];
+      }
     }
-    this.lastEnteredChar = '';
+    return '';
   }
 
   onIPKeyDown(e: KeyboardEvent): void {
     if (!e) {
       return;
     }
-    this.getIPPreviousChar();
+    if (this.specialKeysPressed) {
+      if (['V', 'v', 'C', 'c'].includes(e.key)) {
+        this.specialKeysPressed = false;
+        return;
+      }
+    }
     if (this.keysToSkip.includes(e.key)) {
+      if (this.specialKeys.includes(e.key)) {
+        this.specialKeysPressed = true;
+        return;
+      }
+      this.specialKeysPressed = false;
       return;
     }
-    if (e.key !== '.' && Number.isNaN(parseInt(e.key, 10))) {
-      e.stopPropagation();
-      e.preventDefault();
-      return;
-    }
+    this.specialKeysPressed = false;
+    const previousIPPart = this.getIPPreviousPart();
+    const ipAddressParts = this.ipAddress.split('.');
     if (e.key === '.') {
-      if (this.lastEnteredChar === '.' || this.lastEnteredChar === '') {
-        e.stopPropagation();
-        e.preventDefault();
+      if (
+        previousIPPart === '.' ||
+        previousIPPart === '' ||
+        ipAddressParts.length === 4
+      ) {
+        this.invalidateKeyPress(e);
+        return;
+      } else {
         return;
       }
     }
     if (Number.isNaN(parseInt(e.key, 10))) {
+      this.invalidateKeyPress(e);
       return;
     }
-    const key: number = parseInt(e.key, 10);
-    const ipAddressParts = this.ipAddress.split('.');
-    if (ipAddressParts.length === 4 && ipAddressParts[3] !== '') {
-      const lastPartLen = ipAddressParts[3].length;
-      if (lastPartLen === 2) {
-        const addressNum = parseInt(ipAddressParts[3] + e.key, 10);
-        if (addressNum > 255) {
-          e.stopPropagation();
-          e.preventDefault();
-          return;
-        }
-      }
+    const newIPPart =
+      previousIPPart === ''
+        ? parseInt(e.key, 10)
+        : parseInt(previousIPPart + e.key, 10);
+
+    if (newIPPart > 255) {
+      this.invalidateKeyPress(e);
+      return;
     }
-    this.lastEnteredChar = e.key;
+    this.isIPAddressValid = true;
+  }
+
+  invalidateKeyPress(e: KeyboardEvent): void {
+    e.stopPropagation();
+    e.preventDefault();
+    this.isIPAddressValid = false;
   }
 }

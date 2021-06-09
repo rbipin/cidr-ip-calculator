@@ -62,9 +62,14 @@
   vertical-align: middle;
   .result-header-text {
     font: 400 16px/28px 'Rubik', 'Helvetica Neue', sans-serif;
-    margin-right: 5px;
+  }
+  .result-input-display {
+    font: 100 16px/28px 'Rubik', 'Helvetica Neue', sans-serif;
+    font-style: italic;
+    margin-left: 3px;
   }
   .mat-icon {
+    margin-left: 5px;
     &.processing {
       color: orange;
       animation: rotation 2s linear infinite;
