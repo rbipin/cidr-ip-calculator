@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [AppComponent, IpRangeCalculatorComponent],
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

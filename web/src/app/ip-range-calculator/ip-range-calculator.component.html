@@ -1,56 +1,72 @@
 <div id="ip-range-calc-card" class="card">
   <h3>Find IP Ranges</h3>
-  <section class="flex-row">
-    <div>
-      <mat-form-field appearance="outline" class="ip-address">
-        <mat-label>IP Address</mat-label>
-        <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="ipAddress"
-          (keydown)="onIPKeyDown($event)" (ngModelChange)='onIPAddressChange()'>
-      </mat-form-field>
-      <p class="input-error" *ngIf="ipInputError">{{ipInputError}}</p>
+  <section>
+    <div class="flex-row">
+      <div>
+        <mat-form-field appearance="outline" class="ip-address">
+          <mat-label>IP Address</mat-label>
+          <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="ipAddress"
+            (keydown)="onIPKeyDown($event)" (ngModelChange)="onInputChange()">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="cidr-range">
+          <mat-label>CIDR</mat-label>
+          <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange" [maxLength]="2"
+            (ngModelChange)="onInputChange()" (keydown)="onCidrKeyDown()">
+        </mat-form-field>
+      </div>
+      <div class="calculate-button-container">
+        <button mat-icon-button aria-label="calculate ip range" (click)="getCidrRangeCalculation()"
+          [disabled]='!isInputValid'>
+          <mat-icon>calculate</mat-icon>
+        </button>
+      </div>
     </div>
     <div>
-      <mat-form-field appearance="outline" class="cidr-range">
-        <mat-label>CIDR</mat-label>
-        <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange"
-          (keydown)="onCidrKeyDown($event)" (ngModelChange)="onCidrChange()" [maxLength]="2">
-      </mat-form-field>
-      <p class="input-error" *ngIf="cidrInputError">{{cidrInputError}}}</p>
+      <p class="input-error" *ngIf="ipInputError">{{ipInputError}}</p>
+      <p class="input-error" *ngIf="cidrInputError">{{cidrInputError}}</p>
     </div>
   </section>
   <!--Results Section-->
   <div class="spacer"></div>
   <div class="result-header">
     <span class="result-header-text">Results</span>
-    <ng-container *ngIf="isProcessing; else completed">
-      <mat-icon class="processing">loop</mat-icon>
-    </ng-container>
-    <ng-template #completed>
-      <mat-icon class="completed">check_circle_outlined</mat-icon>
-    </ng-template>
+    <span>{{cidrInput}}</span>
+    <span *ngIf='ipRangeProcessingStatus !== ProcessingStatusType.None' [ngSwitch]='ipRangeProcessingStatus'>
+      <ng-template [ngSwitchCase]="ProcessingStatusType.Processing">
+        <mat-icon class="processing">loop</mat-icon>
+      </ng-template>
+      <ng-template [ngSwitchCase]="ProcessingStatusType.Completed">
+        <mat-icon class="completed">check_circle_outlined</mat-icon>
+      </ng-template>
+      <ng-template [ngSwitchCase]="ProcessingStatusType.Error">
+        <mat-icon class="error" matTooltip={{errorToolTip}}>error_outline</mat-icon>
+      </ng-template>
+    </span>
   </div>
   <hr class="divider-line">
-  <section class="results-container">
+  <section class="results-container" *ngIf="ipRange">
     <div class="row">
       <div class="col-md-6 content-container">
         <p class="label">Total Possible IPs</p>
-        <p class="value">1000</p>
+        <p class="value">{{ipRange.TotalPossibleIPs}}</p>
       </div>
       <div class="col-md-6 content-container">
         <p class="label">Total Usable IPs</p>
-        <p class="value">1000</p>
+        <p class="value">{{ipRange.TotalUsableIPs}}</p>
       </div>
       <div class="col-md-6 content-container">
         <p class="label">Network Address</p>
-        <p class="value">10.120.130.140</p>
+        <p class="value">{{ipRange.NetworkAddress}}</p>
       </div>
       <div class="col-md-6 content-container">
         <p class="label">Broadcast Address</p>
-        <p class="value">10.120.130.140</p>
+        <p class="value">{{ipRange.BroadcastAddress}}</p>
       </div>
       <div class="col-md-6 content-container">
         <p class="label">SubnetMask</p>
-        <p class="value">255.255.255.255</p>
+        <p class="value">{{ipRange.SubnetMask}}</p>
       </div>
     </div>
   </section>

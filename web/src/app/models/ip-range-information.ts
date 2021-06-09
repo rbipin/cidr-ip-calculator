@@ -1,7 +1,7 @@
 export interface IPRangeInformation {
-  totalPossibleIPs: string;
-  totalUsableIPs: string;
-  subnetMask: string;
-  networkAddress: string;
-  broadcastAddress: string;
+  TotalPossibleIPs: string;
+  TotalUsableIPs: string;
+  SubnetMask: string;
+  NetworkAddress: string;
+  BroadcastAddress: string;
 }

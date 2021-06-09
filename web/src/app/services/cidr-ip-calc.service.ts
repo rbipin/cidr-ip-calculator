@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CidrIpCalcService {
+export class CIDRIpCalcService {
   private apiUrl = environment.apiUrl;
   constructor(private httpClient: HttpClient) {}
 
@@ -15,8 +15,8 @@ export class CidrIpCalcService {
     ipAddress: string,
     cidr: number
   ): Observable<IPRangeInformation> {
-    const cidrRangeAPIPath = `/cidr/iprange/${ipAddress}/${cidr}`;
-    const getIPRangeUrl = `${this.apiUrl}/${cidrRangeAPIPath}/`;
+    const cidrRangeAPIPath = `cidr/iprange/${ipAddress}/${cidr}`;
+    const getIPRangeUrl = `${this.apiUrl}/${cidrRangeAPIPath}`;
     return this.httpClient.get<IPRangeInformation>(getIPRangeUrl);
   }
 }

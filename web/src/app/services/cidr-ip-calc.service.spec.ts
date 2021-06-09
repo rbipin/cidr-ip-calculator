@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CidrIpCalcService } from './cidr-ip-calc.service';
+import { CIDRIpCalcService } from './cidr-ip-calc.service';
 
 describe('CidrIpCalcService', () => {
-  let service: CidrIpCalcService;
+  let service: CIDRIpCalcService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CidrIpCalcService);
+    service = TestBed.inject(CIDRIpCalcService);
   });
 
   it('should be created', () => {

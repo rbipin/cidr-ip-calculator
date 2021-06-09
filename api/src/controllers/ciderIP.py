@@ -9,7 +9,8 @@ def calculateIPRange(ip: str, ciderrange: int):
     if not ip:
         raise NullArgumentException(message='ip cannot be null or empty')
     if not ciderrange or ciderrange < 0:
-        raise BadArgumentExcepton(message=f'cidr range cannot be null or {ciderrange}')
+        raise BadArgumentExcepton(
+            message=f'cidr range cannot be null or {ciderrange}')
     if ciderrange > 32:
         raise BadArgumentExcepton(message='cidr range cannot exceed 32')
     return __calculateIPCIDRRange(ip, ciderrange)
@@ -127,6 +128,6 @@ def __calculateIPCIDRRange(ipAddress, cidrRange):
     ipRangeInfo.SubnetMask = __extractSubnetMask(ipBinaryMerged, cidrRange)
     ipRangeInfo.NetworkAddress = __extractNetworkAddress(
         ipBinaryMerged, cidrRange)
-    ipRangeInfo.BroadcaseAddress = __extractBroadcastAddress(
+    ipRangeInfo.BroadcastAddress = __extractBroadcastAddress(
         ipBinaryMerged, cidrRange)
     return ipRangeInfo

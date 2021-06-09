@@ -10,4 +10,4 @@ class IPRangeInfo(BaseModel):
     TotalUsableIPs: Optional[int]
     SubnetMask: Optional[str]
     NetworkAddress: Optional[str]
-    BroadcaseAddress: Optional[str]
+    BroadcastAddress: Optional[str]

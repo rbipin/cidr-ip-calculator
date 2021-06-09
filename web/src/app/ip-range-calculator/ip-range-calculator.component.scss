@@ -12,8 +12,14 @@
 .cidr-range {
   width: 100px;
 }
+
 .calculate-button-container {
-  margin-left: 10px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  .mat-icon {
+    transform: scale(2.5);
+  }
 }
 .flex-row {
   display: flex;
@@ -65,6 +71,9 @@
     }
     &.completed {
       color: green;
+    }
+    &.error {
+      color: #e95123;
     }
   }
 }

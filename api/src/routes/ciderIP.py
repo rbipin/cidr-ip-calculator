@@ -1,7 +1,8 @@
 
 from fastapi import APIRouter, HTTPException
-from controller import ciderIP
+from controllers import ciderIP
 from models.CustomExceptions import *
+from models.IPRangeInfo import *
 
 router = APIRouter(
     prefix="/cidr",
@@ -9,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.get("/iprange/{ip}/{ciderrange}")
+@router.get("/iprange/{ip}/{ciderrange}", response_model=IPRangeInfo)
 async def runGetIPRanges(ip: str, ciderrange: int):
     try:
         return ciderIP.calculateIPRange(ip, ciderrange)
