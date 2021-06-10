@@ -36,6 +36,7 @@ export class IpRangeCalculatorComponent {
   onInputChange(): void {
     this.turnInputDisplayOn = false;
     this.ipRangeProcessingStatus = ProcessingStatus.None;
+    this.isIPAddressValid = this.verifyIPAddress();
     this.isCidrRangeValid = this.verifyCIDRRange();
     this.isInputValid = this.isIPAddressValid && this.isCidrRangeValid;
   }

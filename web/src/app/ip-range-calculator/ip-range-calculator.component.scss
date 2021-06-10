@@ -14,7 +14,6 @@
 }
 
 .calculate-button-container {
-  margin-left: 30px;
   display: flex;
   align-items: center;
   .mat-icon {
@@ -25,6 +24,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  > div:last-child {
+    margin-left: 15px;
+  }
 }
 .flex-column {
   display: flex;

@@ -17,6 +17,18 @@
       "name": "Attach to Chrome",
       "port": 9222,
       "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: pytest",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "cwd": "${workspaceRoot}/api/src/unit_tests",
+      "env": {
+        "PYTHONPATH": "./src"
+      },
+      "envFile": "${workspaceRoot}/.env",
+      "console": "integratedTerminal"
     }
   ]
 }
