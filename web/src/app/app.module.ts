@@ -10,9 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CidrCalculatorComponent } from './cidr-calculator/cidr-calculator.component';
+import { InputIpComponent } from './shared/component/input-ip/input-ip.component';
 
 @NgModule({
-  declarations: [AppComponent, IpRangeCalculatorComponent],
+  declarations: [AppComponent, IpRangeCalculatorComponent, CidrCalculatorComponent, InputIpComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

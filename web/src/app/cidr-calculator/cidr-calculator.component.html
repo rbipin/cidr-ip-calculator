@@ -1,32 +1,27 @@
 <div id="ip-range-calc-card" class="card">
-  <h3>Find IP Ranges</h3>
+  <h3>Calculate CIDR</h3>
   <section>
     <div class="flex-row">
       <div class="ip-address-container">
-        <app-input-ip [(ngModel)]="ipAddress" (isValid)="isIPValid($event)"></app-input-ip>
+        <app-input-ip name="ipAddressStart" [(ngModel)]="ipAddressStart"></app-input-ip>
       </div>
-      <div>
-        <mat-form-field appearance="outline" class="cidr-range">
-          <mat-label>CIDR</mat-label>
-          <input matInput type="text" placeholder="ex 25" maxlength="2" [(ngModel)]="cidrRange" [maxLength]="2"
-            (ngModelChange)="onInputChange()" (keydown)="onCidrKeyDown($event)">
-        </mat-form-field>
+      <div class="ip-address-container">
+        <app-input-ip name="ipAddressEnd" [(ngModel)]="ipAddressEnd"></app-input-ip>
       </div>
+
       <div class="calculate-button-container">
-        <button mat-icon-button aria-label="calculate ip range" (click)="getCidrRangeCalculation()"
-          [disabled]='!isInputValid'>
+        <button mat-icon-button aria-label="calculate CIDR range" [disabled]='!isInputValid'>
           <mat-icon>calculate</mat-icon>
         </button>
       </div>
     </div>
     <div>
       <p class="input-error" *ngIf="ipInputError">{{ipInputError}}</p>
-      <p class="input-error" *ngIf="cidrInputError">{{cidrInputError}}</p>
     </div>
   </section>
   <!--Results Section-->
   <div class="spacer"></div>
-  <div class="result-header">
+  <!-- <div class="result-header">
     <span class="result-header-text">Results</span>
     <span class="result-input-display" *ngIf="turnInputDisplayOn">for {{ipAddress}} /{{cidrRange}}</span>
     <span *ngIf='ipRangeProcessingStatus !== ProcessingStatusType.None' [ngSwitch]='ipRangeProcessingStatus'>
@@ -40,9 +35,9 @@
         <mat-icon class="error" matTooltip={{errorToolTip}}>error_outline</mat-icon>
       </ng-template>
     </span>
-  </div>
+  </div> -->
   <hr class="divider-line">
-  <section class="results-container" *ngIf="ipRange">
+  <!-- <section class="results-container" *ngIf="ipRange">
     <div class="row">
       <div class="col-md-6 content-container">
         <p class="label">Total Possible IPs</p>
@@ -65,5 +60,5 @@
         <p class="value">{{ipRange.SubnetMask}}</p>
       </div>
     </div>
-  </section>
+  </section> -->
 </div>

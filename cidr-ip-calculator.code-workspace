@@ -1,8 +1,16 @@
 {
   "folders": [
     {
-      "path": "."
+      "path": "api"
+    },
+    {
+      "path": "web"
     }
   ],
-  "settings": {}
+  "settings": {
+    "python.testing.pytestArgs": ["/api/src/tests"],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+  }
 }

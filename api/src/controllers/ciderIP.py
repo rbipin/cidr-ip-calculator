@@ -3,16 +3,17 @@
 
 from models.IPRangeInfo import IPRangeInfo
 from models.CustomExceptions import *
+from logic.cidr_calculator import CIDRCalculator
 
 
-def calculateIPRange(ip: str, ciderrange: int):
-    if not ip:
-        raise NullArgumentException(message='ip cannot be null or empty')
-    if not ciderrange or ciderrange < 0:
-        raise BadArgumentExcepton(
-            message=f'cidr range cannot be null or {ciderrange}')
-    if ciderrange > 32:
-        raise BadArgumentExcepton(message='cidr range cannot exceed 32')
+def calculateIPRange(ip: str, cidrrange: int):
+    # if not ciderrange or ciderrange < 0:
+    #     raise BadArgumentExcepton(
+    #         message=f'cidr range cannot be null or {ciderrange}')
+    # if ciderrange > 32:
+    #     raise BadArgumentExcepton(message='cidr range cannot exceed 32')
+    # cidrCalculator = CIDRCalculator()
+    # cidrCalculator.calculateIPRange(ip, cidrrange)
     return __calculateIPCIDRRange(ip, ciderrange)
 
 

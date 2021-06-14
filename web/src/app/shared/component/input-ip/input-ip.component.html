@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" class="ip-address">
+  <mat-label>IP Address</mat-label>
+  <input matInput type="text" placeholder="ex 110.150.140.15" maxlength="15" [(ngModel)]="value"
+    (keydown)="onIPKeyDown($event)" (ngModelChange)="verifyIPAddress()">
+</mat-form-field>

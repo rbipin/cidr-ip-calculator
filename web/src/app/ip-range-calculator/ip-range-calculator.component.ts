@@ -36,7 +36,6 @@ export class IpRangeCalculatorComponent {
   onInputChange(): void {
     this.turnInputDisplayOn = false;
     this.ipRangeProcessingStatus = ProcessingStatus.None;
-    this.isIPAddressValid = this.verifyIPAddress();
     this.isCidrRangeValid = this.verifyCIDRRange();
     this.isInputValid = this.isIPAddressValid && this.isCidrRangeValid;
   }
@@ -68,6 +67,14 @@ export class IpRangeCalculatorComponent {
         return true;
       });
     return false;
+  }
+
+  isIPValid(e: [boolean, string]): void {
+    this.turnInputDisplayOn = false;
+    this.isIPAddressValid = e[0];
+    this.ipInputError = e[1];
+    this.isCidrRangeValid = this.verifyCIDRRange();
+    this.isInputValid = this.isIPAddressValid && this.isCidrRangeValid;
   }
 
   private verifyCIDRRange(): boolean {
