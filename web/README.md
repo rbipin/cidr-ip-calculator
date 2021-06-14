@@ -1,7 +1,7 @@
 
 # CIDR IP Range and Notation Calculator
 
-A fun web applicaiton in angular and python that can help you convert CIDR notation to IP Range and vice versa
+A fun web applicaiton in angular and python that can help you convert CIDR notation to IP Range and vice versa.
 
 
 
