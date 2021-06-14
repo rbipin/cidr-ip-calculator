@@ -3,7 +3,7 @@
   <section>
     <div class="flex-row">
       <div class="ip-address-container">
-        <app-input-ip [(ngModel)]="ipAddress" (isValid)="isIPValid($event)"></app-input-ip>
+        <app-input-ip label="IP Address" [(ngModel)]="ipAddress" (isValid)="isIPValid($event)"></app-input-ip>
       </div>
       <div>
         <mat-form-field appearance="outline" class="cidr-range">

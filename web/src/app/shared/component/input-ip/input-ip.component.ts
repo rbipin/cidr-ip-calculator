@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter, forwardRef } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  forwardRef,
+  Input
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,6 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class InputIpComponent implements ControlValueAccessor {
+  @Input() label = '';
   value = '';
   @Output() isValid: EventEmitter<[boolean, string]> = new EventEmitter();
 
