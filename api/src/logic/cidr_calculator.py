@@ -1,8 +1,11 @@
+from models.CIDRNotation import CIDRNotation
 from models.IPRangeInfo import IPRangeInfo
 from models.CustomExceptions import *
 
 
 class CIDRCalculator:
+
+    totalBits = 32
 
     @classmethod
     def calculateIPRange(self, ipAddress: str, cidrRange: int) -> IPRangeInfo:
@@ -11,15 +14,24 @@ class CIDRCalculator:
         return self.__calculateIPCIDRRange(ipAddress, cidrRange)
 
     @classmethod
-    def calculateCIDRNotation(self, startIPAddress: str, endIPAddress: str):
+    def calculateCIDRNotation(self, startIPAddress: str, endIPAddress: str) -> CIDRNotation:
         self.__validateIPAddress(startIPAddress)
         self.__validateIPAddress(endIPAddress)
-        return self.__calculateIPCIDRRange(startIPAddress, endIPAddress)
+        self.__validateStartAndEndIPRanges(startIPAddress, endIPAddress)
+        return self.__calculateCIDRNotation(startIPAddress, endIPAddress)
+
+    @classmethod
+    def __validateStartAndEndIPRanges(self, startIP: str, endIP: str):
+        startIPNum = list(map(int, startIP.split('.')))
+        endIPNum = list(map(int, endIP.split('.')))
+        for index, startIPPart in enumerate(startIPNum):
+            if startIPPart > endIPNum[index]:
+                raise BadArgumentExcepton(
+                    'Starting IP Range cannot be greater than Ending IP')
 
     @classmethod
     def __calculateIPCIDRRange(self, ipAddress, cidrRange) -> IPRangeInfo:
-        totalBits = 32
-        hostIPRange = totalBits - cidrRange
+        hostIPRange = self.totalBits - cidrRange
         totalIPsPossible = (2 ** hostIPRange)
         totalUsableIPs = totalIPsPossible - 2
         if (totalUsableIPs < 0):
@@ -36,8 +48,26 @@ class CIDRCalculator:
         return ipRangeInfo
 
     @classmethod
-    def __calculateCIDRNotation(startingIPAddress: str, endingIPAddr: str):
-        pass
+    def __calculateCIDRNotation(self, startIPAddress: str, endIPAddress: str) -> CIDRNotation:
+        startIPBinaryMerged = self.__convertIPToBinary(startIPAddress)
+        endIPBinaryMerged = self.__convertIPToBinary(endIPAddress)
+        cidrValue = self.totalBits
+        for index, binValue in enumerate(startIPBinaryMerged):
+            if binValue == endIPBinaryMerged[index]:
+                continue
+            cidrValue -= 1
+        cidrNotation = CIDRNotation()
+        if cidrValue == self.totalBits:
+            cidrNotation.IP = startIPAddress
+            cidrNotation.CIDR = cidrValue
+            return cidrNotation
+        newIPAddressParts = list(map(int, startIPAddress.split(".")))
+        newIPAddressParts[3] = newIPAddressParts[3] + 1
+        newIPAddress = ".".join(map(str, newIPAddressParts))
+
+        cidrNotation.IP = newIPAddress
+        cidrNotation.CIDR = cidrValue
+        return cidrNotation
 
     @classmethod
     def __validateIPAddress(self, ipAddress: str):
@@ -63,7 +93,7 @@ class CIDRCalculator:
     @classmethod
     def __convertIPToBinary(self, ipAddress):
         ipBinary = []
-        ip = [int(x) for x in ipAddress.split('.')]
+        ip = list(map(int, ipAddress.split('.')))
         # Binary format of the IP
         for ipSec in ip:
             binaryIPSection = format(ipSec, '08b')
