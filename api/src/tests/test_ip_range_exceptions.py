@@ -3,40 +3,7 @@ from logic.cidr_calculator import CIDRCalculator
 from models.CustomExceptions import *
 
 
-class TestCalculateIPRange(unittest.TestCase):
-
-    def test_calculate_ip_range_for_cidr_32(self):
-        ip = '74.125.227.0'
-        cidrRange = 32
-        cidr = CIDRCalculator()
-        result = cidr.calculateIPRange(ip, cidrRange)
-        self.assertEqual(result.SubnetMask, "255.255.255.255")
-        self.assertEqual(result.TotalPossibleIPs, 1)
-        self.assertEqual(result.TotalUsableIPs, 0)
-        self.assertEqual(result.NetworkAddress, '74.125.227.0')
-        self.assertEqual(result.BroadcastAddress, '74.125.227.0')
-
-    def test_calculate_for_cidrRange_29(self):
-        ip = '74.125.227.0'
-        cidrRange = 29
-        cidr = CIDRCalculator()
-        result = cidr.calculateIPRange(ip, cidrRange)
-        self.assertEqual(result.SubnetMask, "255.255.255.248")
-        self.assertEqual(result.TotalPossibleIPs, 8)
-        self.assertEqual(result.TotalUsableIPs, 6)
-        self.assertEqual(result.NetworkAddress, '74.125.227.0')
-        self.assertEqual(result.BroadcastAddress, '74.125.227.7')
-
-    def test_calculate_for_cidrRange_15(self):
-        ip = '10.150.135.110'
-        cidrRange = 15
-        cidr = CIDRCalculator()
-        result = cidr.calculateIPRange(ip, cidrRange)
-        self.assertEqual(result.SubnetMask, "255.254.0.0")
-        self.assertEqual(result.TotalPossibleIPs, 131072)
-        self.assertEqual(result.TotalUsableIPs, 131070)
-        self.assertEqual(result.NetworkAddress, '10.150.0.0')
-        self.assertEqual(result.BroadcastAddress, '10.151.255.255')
+class TestIPRangeExceptions(unittest.TestCase):
 
     def test_calculate_ip_range_when_ip_over_255_all(self):
         ip = '256.256.256.256'

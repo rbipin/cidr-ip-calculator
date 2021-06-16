@@ -156,7 +156,8 @@ class CIDRCalculator:
         networkIPPart = ipParts[0]
         hostIPPart = ipParts[1]
         newNetworkIP = self.__zeroToOnes(networkIPPart)
-        subnetMaskIPBinary = newNetworkIP + hostIPPart
+        newHostIPPart = self.__OnesToZero(hostIPPart)
+        subnetMaskIPBinary = newNetworkIP + newHostIPPart
         subnetMask = self.__convertBinaryToIP(subnetMaskIPBinary)
         return ".".join(map(str, subnetMask))
 
