@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IPRangeInformation } from '../models/ip-range-information';
 import { CIDRIpCalcService } from '../services/cidr-ip-calc.service';
-
-enum ProcessingStatus {
-  None,
-  Completed,
-  Processing,
-  Error
-}
+import { ProcessingStatus } from '../shared/enums';
 
 @Component({
   selector: 'app-ip-range-calculator',

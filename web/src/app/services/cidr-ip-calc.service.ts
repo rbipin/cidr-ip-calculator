@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPRangeInformation } from '../models/ip-range-information';
+import { CIDRNotation } from '../models/cidr-notation';
 import { environment } from './../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { CIDRNotationRequest } from '../models/cidrNotationRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,13 @@ export class CIDRIpCalcService {
   getCIDRNotation(
     startIPAddress: string,
     endIPAddress: string
-  ): Observable<string> {
-    const dummy = of('dummy');
-    return dummy;
+  ): Observable<CIDRNotation> {
+    const request: CIDRNotationRequest = {
+      StartingIP: startIPAddress,
+      EndingIP: endIPAddress
+    };
+    const cidrRangeAPIPath = `cidr/cidr-range`;
+    const getCIDRRangeUrl = `${this.apiUrl}/${cidrRangeAPIPath}`;
+    return this.httpClient.post<CIDRNotation>(getCIDRRangeUrl, request);
   }
 }

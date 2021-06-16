@@ -3,14 +3,17 @@
   <section>
     <div class="flex-row">
       <div class="ip-address-container">
-        <app-input-ip label="Start IP Address" name="ipAddressStart" [(ngModel)]="ipAddressStart"></app-input-ip>
+        <app-input-ip label="Start IP Address" name="ipAddressStart" [(ngModel)]="ipAddressStart"
+          (isValid)="isStartIPValid($event)">
+        </app-input-ip>
       </div>
       <div class="ip-address-container">
-        <app-input-ip label="End IP Address" name="ipAddressEnd" [(ngModel)]="ipAddressEnd"></app-input-ip>
+        <app-input-ip label="End IP Address" name="ipAddressEnd" [(ngModel)]="ipAddressEnd"
+          (isValid)="isEndingIPValid($event)"></app-input-ip>
       </div>
 
       <div class="calculate-button-container">
-        <button mat-icon-button aria-label="calculate CIDR range" [disabled]='!isInputValid'>
+        <button mat-icon-button aria-label="calculate CIDR range" [disabled]='!isInputValid' (click)="getCIDRRange()">
           <mat-icon>calculate</mat-icon>
         </button>
       </div>
@@ -21,10 +24,10 @@
   </section>
   <!--Results Section-->
   <div class="spacer"></div>
-  <!-- <div class="result-header">
+  <div class="result-header">
     <span class="result-header-text">Results</span>
-    <span class="result-input-display" *ngIf="turnInputDisplayOn">for {{ipAddress}} /{{cidrRange}}</span>
-    <span *ngIf='ipRangeProcessingStatus !== ProcessingStatusType.None' [ngSwitch]='ipRangeProcessingStatus'>
+    <span class="result-input-display" *ngIf="turnInputDisplayOn">for range {{ipAddressStart}} - {{ipAddressEnd}}</span>
+    <span *ngIf='cidrRangeProcessingStatus !== ProcessingStatusType.None' [ngSwitch]='cidrRangeProcessingStatus'>
       <ng-template [ngSwitchCase]="ProcessingStatusType.Processing">
         <mat-icon class="processing">loop</mat-icon>
       </ng-template>
@@ -35,30 +38,14 @@
         <mat-icon class="error" matTooltip={{errorToolTip}}>error_outline</mat-icon>
       </ng-template>
     </span>
-  </div> -->
+  </div>
   <hr class="divider-line">
-  <!-- <section class="results-container" *ngIf="ipRange">
+  <section class="results-container" *ngIf="cidrNotation">
     <div class="row">
       <div class="col-md-6 content-container">
-        <p class="label">Total Possible IPs</p>
-        <p class="value">{{ipRange.TotalPossibleIPs}}</p>
-      </div>
-      <div class="col-md-6 content-container">
-        <p class="label">Total Usable IPs</p>
-        <p class="value">{{ipRange.TotalUsableIPs}}</p>
-      </div>
-      <div class="col-md-6 content-container">
-        <p class="label">Network Address</p>
-        <p class="value">{{ipRange.NetworkAddress}}</p>
-      </div>
-      <div class="col-md-6 content-container">
-        <p class="label">Broadcast Address</p>
-        <p class="value">{{ipRange.BroadcastAddress}}</p>
-      </div>
-      <div class="col-md-6 content-container">
-        <p class="label">SubnetMask</p>
-        <p class="value">{{ipRange.SubnetMask}}</p>
+        <p class="label">CIDR Notation</p>
+        <p class="value">{{cidrNotation.IP}} /{{cidrNotation.CIDR}}</p>
       </div>
     </div>
-  </section> -->
+  </section>
 </div>
