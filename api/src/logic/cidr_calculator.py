@@ -57,11 +57,12 @@ class CIDRCalculator:
         for index, binValue in enumerate(startIPBinaryMerged):
             if binValue == endIPBinaryMerged[index]:
                 continue
-            cidrValue -= 1
+            cidrValue = self.totalBits - (self.totalBits - index)
+            break
         cidrNotation = CIDRNotation()
         if cidrValue == self.totalBits:
             cidrNotation.IP = startIPAddress
-            cidrNotation.CIDR = cidrValue
+            cidrNotation.CIDR = self.totalBits
             return cidrNotation
         newIPAddressParts = list(map(int, startIPAddress.split(".")))
         newIPAddressParts[3] = newIPAddressParts[3] + 1

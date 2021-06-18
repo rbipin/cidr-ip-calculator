@@ -10,8 +10,8 @@ POST http://localhost/cidr/cidr-range HTTP/1.1
 content-type: application/json
 
 {
-  "StartingIP": "74.120.11.50",
-  "EndingIP": "74.120.11.57"
+  "StartingIP": "74.120.11.0",
+  "EndingIP": "74.120.11.7"
 }
 
 ###
