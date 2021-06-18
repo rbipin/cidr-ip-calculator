@@ -28,6 +28,8 @@ class CIDRCalculator:
             if startIPPart > endIPNum[index]:
                 raise BadArgumentExcepton(
                     'Starting IP Range cannot be greater than Ending IP')
+            elif startIPPart < endIPNum[index]:
+                return
 
     @classmethod
     def __calculateIPCIDRRange(self, ipAddress, cidrRange) -> IPRangeInfo:

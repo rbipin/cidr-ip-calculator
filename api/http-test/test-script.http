@@ -1,0 +1,25 @@
+# Script for REST Client Plugin
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+###
+
+GET http://localhost/cidr/iprange/74.120.0.0/22 HTTP/1.1
+
+###
+
+POST http://localhost/cidr/cidr-range HTTP/1.1
+content-type: application/json
+
+{
+  "StartingIP": "74.120.11.50",
+  "EndingIP": "74.120.11.57"
+}
+
+###
+POST http://localhost/cidr/cidr-range 
+content-type: application/json
+
+{
+  "StartingIP": "74.120.0.0",
+  "EndingIP": "74.120.10.0"
+}
+
