@@ -3,12 +3,12 @@
   <section>
     <div class="flex-row">
       <div class="ip-address-container">
-        <app-input-ip label="Start IP Address" name="ipAddressStart" [(ngModel)]="ipAddressStart"
+        <app-input-ip label="Start IP Address" name="StartingIP" [(ngModel)]="ipAddressStart"
           (isValid)="isStartIPValid($event)">
         </app-input-ip>
       </div>
       <div class="ip-address-container">
-        <app-input-ip label="End IP Address" name="ipAddressEnd" [(ngModel)]="ipAddressEnd"
+        <app-input-ip label="End IP Address" name="EndingIP" [(ngModel)]="ipAddressEnd"
           (isValid)="isEndingIPValid($event)"></app-input-ip>
       </div>
 
@@ -35,7 +35,7 @@
         <mat-icon class="completed">check_circle_outlined</mat-icon>
       </ng-template>
       <ng-template [ngSwitchCase]="ProcessingStatusType.Error">
-        <mat-icon class="error" matTooltip={{errorToolTip}}>error_outline</mat-icon>
+        <mat-icon class="error">error_outline</mat-icon>
       </ng-template>
     </span>
   </div>
@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-md-6 content-container">
         <p class="label">CIDR Notation</p>
-        <p class="value">{{cidrNotation.IP}} /{{cidrNotation.CIDR}}</p>
+        <p class="value">{{cidrNotation.IP}} / {{cidrNotation.CIDR}}</p>
       </div>
     </div>
   </section>

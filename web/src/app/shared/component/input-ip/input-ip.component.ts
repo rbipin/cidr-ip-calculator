@@ -21,7 +21,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class InputIpComponent implements ControlValueAccessor {
   @Input() label = '';
-  value = '';
+  private _value = '';
+  get value(): string {
+    return this._value;
+  }
+  set value(v: string) {
+    this._value = v;
+    this.onChange(v);
+  }
   @Output() isValid: EventEmitter<[boolean, string]> = new EventEmitter();
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -41,7 +48,8 @@ export class InputIpComponent implements ControlValueAccessor {
   ];
   private specialKeys = ['Control', 'Meta'];
   writeValue(obj: any): void {
-    this.value = obj;
+    this._value = obj;
+    this.onChange(this._value);
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;

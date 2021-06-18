@@ -23,7 +23,7 @@ async def runGetIPRanges(ip: str, ciderrange: int):
             status_code=500, detail='Unhandled Server exception')
 
 
-@router.post("/cider-range", name="Calculate CIDR Range")
+@router.post("/cidr-range", name="Calculate CIDR Range")
 async def runGetCiderRange(request: CIDRNotationRequest):
     try:
         return ciderIP.calculateCiderIPRange(request.StartingIP, request.EndingIP)

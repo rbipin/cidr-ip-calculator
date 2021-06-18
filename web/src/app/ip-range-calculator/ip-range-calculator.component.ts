@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IPRangeInformation } from '../models/ip-range-information';
 import { CIDRIpCalcService } from '../services/cidr-ip-calc.service';
+import { HelperService } from '../services/helper.service';
 import { ProcessingStatus } from '../shared/enums';
 
 @Component({
@@ -23,9 +24,11 @@ export class IpRangeCalculatorComponent {
   private keysToSkip = ['Backspace', 'Delete', 'Tab', 'Control', 'Meta'];
   private specialKeys = ['Control', 'Meta'];
   isInputValid = this.isIPAddressValid && this.isCidrRangeValid;
-  errorToolTip = '';
 
-  constructor(private cidrIPCalcService: CIDRIpCalcService) {}
+  constructor(
+    private cidrIPCalcService: CIDRIpCalcService,
+    private helperService: HelperService
+  ) {}
 
   onInputChange(): void {
     this.turnInputDisplayOn = false;
@@ -87,7 +90,6 @@ export class IpRangeCalculatorComponent {
 
   getCidrRangeCalculation(): void {
     this.ipRangeProcessingStatus = ProcessingStatus.Processing;
-    this.errorToolTip = '';
     this.turnInputDisplayOn = true;
     const cidrRangeNum = parseInt(this.cidrRange, 10);
     this.cidrIPCalcService
@@ -99,8 +101,11 @@ export class IpRangeCalculatorComponent {
         },
         (error) => {
           this.ipRangeProcessingStatus = ProcessingStatus.Error;
-          this.errorToolTip = error.message;
-          console.log(error);
+          const errorMessage = `${error.message}\n${
+            error.error?.detail == null ? '' : error.error?.detail
+          }`;
+          this.helperService.setPopupMessage(errorMessage);
+          console.log(errorMessage);
         }
       );
   }

@@ -9,12 +9,19 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { CidrCalculatorComponent } from './cidr-calculator/cidr-calculator.component';
 import { InputIpComponent } from './shared/component/input-ip/input-ip.component';
+import { SnackBarPopupComponent } from './shared/component/snack-bar-popup/snack-bar-popup.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [AppComponent, IpRangeCalculatorComponent, CidrCalculatorComponent, InputIpComponent],
+  declarations: [
+    AppComponent,
+    IpRangeCalculatorComponent,
+    CidrCalculatorComponent,
+    InputIpComponent,
+    SnackBarPopupComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -23,7 +30,7 @@ import { InputIpComponent } from './shared/component/input-ip/input-ip.component
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
-    MatTooltipModule
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
