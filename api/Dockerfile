@@ -2,8 +2,8 @@ FROM python:3.9.5-slim-buster as base
 # Uncomment to test locally
 EXPOSE 80  
 # EXPOSE $PORT 
-COPY /api/src /app
-COPY /api/requirements.txt /app/requirements.txt
+COPY /src /app
+COPY requirements.txt /app/requirements.txt
 
 # for pipenv
 # RUN pip install pipenv 
