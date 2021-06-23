@@ -1,6 +1,6 @@
-from models.CIDRNotation import CIDRNotation
-from models.IPRangeInfo import IPRangeInfo
-from models.CustomExceptions import *
+from src.models.CIDRNotation import CIDRNotation
+from src.models.IPRangeInfo import IPRangeInfo
+from src.models.CustomExceptions import *
 
 
 class CIDRCalculator:

@@ -1,9 +1,9 @@
 
 from fastapi import APIRouter, HTTPException
 from controllers import ciderIP
-from models.CIDRNotationRequest import CIDRNotationRequest
-from models.CustomExceptions import *
-from models.IPRangeInfo import *
+from src.models.CIDRNotationRequest import CIDRNotationRequest
+from src.models.CustomExceptions import *
+from src.models.IPRangeInfo import *
 
 router = APIRouter(
     prefix="/cidr",
