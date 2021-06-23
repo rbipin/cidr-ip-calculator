@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from middlewares.custom_auth_middleware import CustomAuthenticationMiddleware
+# from middlewares.custom_auth_middleware import CustomAuthenticationMiddleware
 from routes import healthcheck, ciderIP
 
 app = FastAPI(redoc_url="/")
