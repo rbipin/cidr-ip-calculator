@@ -1,9 +1,9 @@
 """
 """
 
-from models.IPRangeInfo import IPRangeInfo
-from models.CustomExceptions import *
-from logic.cidr_calculator import CIDRCalculator
+from src.models.IPRangeInfo import IPRangeInfo
+from src.models.CustomExceptions import *
+from src.logic.cidr_calculator import CIDRCalculator
 
 
 def calculateIPRange(ip: str, cidrrange: int) -> IPRangeInfo:
