@@ -13,8 +13,7 @@ WORKDIR /app
 #COPY Pipfile.lock .
 #RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 RUN pip install -r requirements.txt
-COPY . /app
 # for local 
-ENTRYPOINT [ "python", "server.py" ]  
+#ENTRYPOINT [ "python", "server.py" ]  
 # for heroku
-# CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", $PORT]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", $PORT]
