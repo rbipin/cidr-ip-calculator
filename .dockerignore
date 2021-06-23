@@ -1,0 +1,6 @@
+api/src/tests
+api/src/tests/*
+api/src/dockercommands.sh
+api/src/Pipfile
+api/src/Pipfile.lock
+api/src/Procfile

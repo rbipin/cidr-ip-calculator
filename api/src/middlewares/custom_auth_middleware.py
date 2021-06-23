@@ -4,11 +4,12 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 import os
 
-skipAuthList = ['/healthcheck']
+skipAuthList = ['/healthcheck', '/', '/openapi.json']
 
 
 class CustomAuthenticationMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
+        print(request.url.path)
         if request.url.path in skipAuthList:
             return await call_next(request)
         xtoken = os.getenv('xtoken')
