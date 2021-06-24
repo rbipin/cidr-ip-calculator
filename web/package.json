@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "config": "ts-node set-env.ts",
     "lint": "eslint . --ext js,ts,json --quiet --fix",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run config && ng serve",
+    "build": "npm run config && ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "npm run config && ng test"
   },
   "private": true,
   "dependencies": {
@@ -21,9 +22,13 @@
     "@angular/platform-browser": "~12.0.3",
     "@angular/platform-browser-dynamic": "~12.0.3",
     "@angular/router": "~12.0.3",
+    "@types/colors": "^1.2.1",
     "bootstrap": "^5.0.1",
+    "colors": "^1.4.0",
+    "dotenv": "^10.0.0",
     "rxjs": "~6.6.0",
     "subsink": "^1.0.2",
+    "ts-node": "^10.0.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"
   },
