@@ -2,8 +2,21 @@ import { writeFile } from 'fs';
 import * as colors from 'colors';
 import * as dotenv from 'dotenv';
 dotenv.config();
+const environment = process.argv[2];
 // Configure Angular `environment.ts` file path
-const targetPath = './src/environments/environment.ts';
+let targetPath = '';
+switch (environment) {
+  case 'prod':
+    targetPath = `./src/environments/environment.prod.ts`;
+    break;
+  case 'test':
+    targetPath = `./src/environments/environment.test.ts`;
+    break;
+  default:
+    targetPath = `./src/environments/environment.ts`;
+    break;
+}
+
 // `environment.ts` file structure
 const envConfigFile = `export const environment = {
   apiUrl: 'https://cidr-calc-api.herokuapp.com',
