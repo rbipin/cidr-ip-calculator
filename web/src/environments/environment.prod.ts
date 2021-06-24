@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api/'
+  apiUrl: 'https://cidr-calc-api.herokuapp.com/'
 };
