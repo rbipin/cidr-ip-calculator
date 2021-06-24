@@ -4,4 +4,5 @@ api/src/dockercommands.sh
 api/src/Pipfile
 api/src/Pipfile.lock
 api/src/Procfile
-/web
+/dist
+dist/
