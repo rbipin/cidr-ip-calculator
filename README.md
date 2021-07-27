@@ -3,8 +3,6 @@
 A fun web applicaiton in angular and python that can help you convert CIDR notation to IP Range and vice versa
 
 
-
-
 ## Authors
 
 - [@BipinRadhakrishnan](https://www.github.com/rbipin)
@@ -12,7 +10,7 @@ A fun web applicaiton in angular and python that can help you convert CIDR notat
   
 ## Demo
 
-Insert gif or link to demo
+[Demo](https://infallible-kepler-944a1a.netlify.app)
 
   
 ## Tech Stack
@@ -22,5 +20,6 @@ Insert gif or link to demo
 **Server:** Python, FastApi Framework
 
 **Infrastructure**: 
-
+ - **UI/ Front End**: Netlify
+ - **Backend:** Heroku
   
